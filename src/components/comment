@@ -1,0 +1,21 @@
+Comment List - pass down a list  (comment data) it will map over it and for each comment it will return data=comment
+
+Challenges in Live data:
+1. Get Data Live
+2. Update the UI
+
+There are two ways to handle Live Data:
+
+1. Web Sockets: It is 2 way connection ,quickly send data from either side from ui to backend and vice versa (birectional live data)  (handshake similar)  (eg- live trading platform eg- zerodha,whatsapp)
+
+UI<------------->Server
+
+2.API Polling
+-UI requests the server and data flows from server to UI after and interval . (In websockets there is no interval)
+- eg- let me check after each 10 sec if new data came up or not. (like in Email services, Crickbuzz) 
+- Youtube live chat- API Polling - making calls each 1.5sec
+
+UI layer-
+
+why Page is not exploding- because after a certain time youtube cleans up the data  (it is not storing the data in the dom)
+It also depends on the browser - for eg : Internet Explorer , youtube stores less no of live chats as it is old browser.
