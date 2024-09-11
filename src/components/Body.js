@@ -10,9 +10,9 @@ const Body = () => {
     <div>
        <div className='flex'>
     <Sidebar/>
-    {/* <MainContainer/>
-    <WatchPage/> */}
+    <div className="w-full">
     <Outlet/>
+    </div>
    
     </div>
 
@@ -21,3 +21,8 @@ const Body = () => {
 }
 
 export default Body
+
+
+
+  {/* <MainContainer/>
+    <WatchPage/> */}

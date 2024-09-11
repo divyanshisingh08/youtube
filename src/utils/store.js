@@ -4,12 +4,14 @@ import searchSlice from "./searchSlice";
 import chatSlice from "./chatSlice";
 
 
+
 const store=configureStore({
     reducer:
     {
         menu:menuSlice,
         search:searchSlice,
-        chat:chatSlice
+        chat:chatSlice,
+      
     }
 
 });

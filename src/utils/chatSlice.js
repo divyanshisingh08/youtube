@@ -11,7 +11,7 @@ const chatSlice=createSlice({
             //it will restric no of messages to live_Messages_Count=10; = 10 (constant file) and remove 1 message from top
             state.messages.splice(live_Messages_Count,1);
 
-            state.messages.push(action.payload);
+            state.messages.unshift(action.payload);
             //push messages from back
         }
 

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { MENU, YOUTUBE_SEARCH_API } from "../utils/constants";
+import { MENU, USER_ICON, YOUTUBE_HAMBURGER_MENU, YOUTUBE_LOGO, YOUTUBE_SEARCH_API } from "../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleMenu } from "../utils/menuSlice";
-
 import { cacheResults } from "../utils/searchSlice";
+import { Link } from "react-router-dom";
 
 
 const Header = () => {
@@ -56,7 +56,7 @@ const Header = () => {
    *  - call useEffect as it is dependent on searchQuery
    *  -start timer =>make API call after 200ms (new timer)
    *
-   *
+   * 
    *
    */
   const getSearchSuggestions = async () => {
@@ -81,15 +81,17 @@ const Header = () => {
         <img
           onClick={() => toggleMenuHandler()}
           className="h-8 cursor-pointer"
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Hamburger_icon.svg/1200px-Hamburger_icon.svg.png"
+          src={YOUTUBE_HAMBURGER_MENU}
           alt="Menu"
         />
     
+    <a href="/">
         <img
-          className="h-8 mx-4"
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/YouTube_Logo_2017.svg/2560px-YouTube_Logo_2017.svg.png"
+          className="h-7 mx-4"
+          src={YOUTUBE_LOGO}
           alt="YouTube Logo"
         />
+    </a>
       </div>
       <div className="col-span-10 px-10">
         <div>
@@ -120,7 +122,7 @@ const Header = () => {
       <div className="col-span-1">
         <img
           className="h-8"
-          src="https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png"
+          src={USER_ICON}
           alt="user"
         />
       </div>

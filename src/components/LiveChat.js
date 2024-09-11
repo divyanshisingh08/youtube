@@ -1,68 +1,75 @@
+
+
+
 import React, { useEffect, useState } from "react";
-import ChatMessage from "./ChatMessage";
 import { useDispatch, useSelector } from "react-redux";
+import { FaUserCircle } from "react-icons/fa";
+import { AiOutlineSend } from "react-icons/ai";
+
+import ChatMessage from "../components/ChatMessage";
 import { addMessage } from "../utils/chatSlice";
-import { generateRandomName, generateStrings } from "../utils/helper";
+import {
+  generateRandomCompliment,
+  generateRandomName,
+} from "../utils/helper";
 
 const LiveChat = () => {
-  const [livemessage, setLiveMessage] = useState("");
-
   const dispatch = useDispatch();
-
   const chatMessages = useSelector((store) => store.chat.messages);
+  const [userMessage, setUserMessage] = useState("");
 
   useEffect(() => {
-    const i = setInterval(() => {
-      //API Polling
-      console.log("API POLLING");
-      dispatch(
-        addMessage({
-          name: generateRandomName(),
-          message: generateStrings(20) + "👌",
-        })
-      );
+    const intervalId = setInterval(() => {
+      const newMessage = {
+       
+        name: generateRandomName(),
+        message: generateRandomCompliment(),
+      };
+      dispatch(addMessage(newMessage));
     }, 2000);
 
-    return () => clearInterval(i);
-  });
+    return () => clearInterval(intervalId);
+  }, [dispatch]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const newMessage = {
+  
+      name: "User name",
+      message: userMessage,
+    };
+    dispatch(addMessage(newMessage));
+    setUserMessage("");
+  };
+
+  const handleChange = (e) => {
+    setUserMessage(e.target.value);
+  };
 
   return (
-    <>
-      <div className="w-full h-[400px] border border-black ml-2 p-2 bg-slate-100 rounded-lg overflow-y-scroll flex flex-col-reverse">
-        {/* //We should not use Indexes as key but here as it is made up data we dont have key  */}
-        <div>
-          {chatMessages?.map((c, i) => (
-            <ChatMessage key={i} name={c.name} message={c.message} />
-          ))}
-        </div>
+    <div>
+      <div className="w-full  p-2  border shadow-lg bg-slate-100 rounded-lg overflow-y-scroll  h-[200px] md:h-[410px]  flex flex-col-reverse border-black">
+        {chatMessages.map((message, i) => (
+          <ChatMessage key={i} {...message} />
+        ))}
       </div>
+      <form onSubmit={handleSubmit}>
+        <div className="bg-white flex p-2 gap-2 rounded-xl items-center">
+          <FaUserCircle className="md:text-4xl " />
 
-      <form
-        className="w-full p-2 ml-2 border border-black rounded-lg flex"
-        onSubmit={(e) => {
-          e.preventDefault();
-          // console.log("LIVE MESSAGE", livemessage)
-          dispatch(
-          addMessage({
-            name:"Divyanshi",
-            message:livemessage,
-          })
-        );
-        setLiveMessage("")
-        }}
-      >
-        <input
-          className="w-80 px-2"
-          type="text"
-          value={livemessage}
-          onChange={(e) => {
-            setLiveMessage(e.target.value);
-          }}
-
-        />
-        <button className="px-2 mx-2 bg-green-100">Send</button>
+          <input
+            className="outline-none border-b-2 w-full border-blue-200"
+            placeholder="Say something..."
+            value={userMessage}
+            name="userMessage"
+            onChange={handleChange}
+          />
+          <button type="submit" className="bg-none border-none">
+            <AiOutlineSend className="w-10 cursor-pointer" />
+          </button>
+        </div>
       </form>
-    </>
+    </div>
   );
 };
 

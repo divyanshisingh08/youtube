@@ -30,42 +30,25 @@
         }
 
 
-       export  function generateStrings(length) {
-            let result = '';
-            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-            const charactersLength = characters.length;
-            let counter = 0;
-            while (counter < length) {
-              result += characters.charAt(Math.floor(Math.random() * charactersLength));
-              counter += 1;
-            }
-            return result;
-        }
+        let complimentList = [
+          "You look great today",
+          "You’re a smart cookie.",
+          "You have impeccable manners",
+          "I like your style",
+          "You have the best laugh.",
+          "I appreciate you",
+          "You are the most perfect you there is",
+          "You light up the room.",
+          "You deserve a hug right now",
+          "That color is perfect on you.",
+          "You’re a candle in the darkness",
+          "You’re a great example to others",
+        ];
         
-      //Function to find the nth prime number
- export function findNthPrime(n) {
+        export function generateRandomCompliment() {
+          return complimentList[Math.floor(Math.random() * complimentList.length)];
+        }   
 
-  //Function to check the number is prime
-function isPrime(num) {
-  if (num <= 1) {
-    return false;
-  }
-  for (let i = 2; i <= Math.sqrt(num); i++) {
-    if (num % i === 0) {
-      return false;
-    }
-  }
-  return true;
-}
 
-  if (n === 0) return;
-  let count = 0;
-  let num = 2;
-  while (count < n) {
-    if (isPrime(num)) {
-      count++;
-    }
-    num++;
-  }
-  return num - 1;
-}
+       
+        

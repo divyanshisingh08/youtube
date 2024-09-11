@@ -1,49 +1,50 @@
+
 import React from "react";
+import { AiFillHome, AiFillLike } from "react-icons/ai";
+import { RiVideoFill } from "react-icons/ri";
+import {
+  MdSubscriptions,
+  MdVideoLibrary,
+  MdHistory,
+  MdOutlineWatchLater,
+} from "react-icons/md";
 import { useSelector } from "react-redux";
-import store from "../utils/store";
 import { Link } from "react-router-dom";
-import WatchPage from "./WatchPage";
-import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
-import SubscriptionsRoundedIcon from '@mui/icons-material/SubscriptionsRounded';
-import { Home } from "@mui/icons-material";
 
-const Sidebar = () => {
+const SideBar = () => {
   const isMenuOpen = useSelector((store) => store.menu.isMenuOpen);
-
+  const btns = [
+    {
+      icon: <AiFillHome />,
+      name: "Home",
+      to: "/",
+    },
+    { icon: <MdSubscriptions />, name: "Subscriptions", to: "/" },
+    { icon: <MdVideoLibrary />, name: "Library", to: "/" },
+    { icon: <MdHistory />, name: "History", to: "/" },
+    { icon: <RiVideoFill />, name: "Your Videos", to: "/" },
+    { icon: <MdOutlineWatchLater />, name: "Watch Later", to: "/" },
+    { icon: <AiFillLike />, name: "Liked Videos", to: "/" },
+  ];
+  const SideBtn = ({ icon, btnName }) => {
+    return (
+      <button className="flex items-center p-2 px-5 w-full my-2 justify-start hover:bg-gray-200 rounded-lg">
+        <span className="mr-2">{icon}</span> {btnName}
+      </button>
+    );
+  };
   if (!isMenuOpen) return null;
   return (
-    <div className="p-5 shadow-lg w-48 ">
-      
-      <ul className="text-xl">
-        <li>
-          <HomeRoundedIcon />
-          <Link to="/">Home</Link>
-        </li>
-        <li>
-          Shorts</li>
-        <li>
-        <SubscriptionsRoundedIcon/>
-          Subscriptions</li>
-        <li>Live</li>
-      </ul>
-
-      <h1 className="font-bold pt-5 text-xl">Explore</h1>
-      <ul>
-        <li>Music</li>
-        <li>Sports</li>
-        <li>Gaming</li>
-        <li>Movies</li>
-      </ul>
-
-      <h1 className="font-bold pt-5 text-xl">You</h1>
-      <ul>
-        <li>History</li>
-        <li>Watch Later</li>
-        <li>Liked Videos</li>
-        <li>Playlist</li>
-      </ul>
+    <div className="w-52 mx-1 hidden md:block">
+      {btns.map((btn, i) => {
+        return (
+          <Link key={i} to={btn.to}>
+            <SideBtn icon={btn.icon} btnName={btn.name} />
+          </Link>
+        );
+      })}
     </div>
   );
 };
 
-export default Sidebar;
+export default SideBar;

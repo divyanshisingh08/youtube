@@ -11,7 +11,7 @@ const VideoCard = ({ info }) => {
           <li>{(statistics.viewCount)} views </li>
       </ul>
     </div>;
-  }; 
+  };    
 
 
 export default VideoCard
