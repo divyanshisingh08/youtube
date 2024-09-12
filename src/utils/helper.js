@@ -37,7 +37,6 @@
           "I like your style",
           "You have the best laugh.",
           "I appreciate you",
-          "You are the most perfect you there is",
           "You light up the room.",
           "You deserve a hug right now",
           "That color is perfect on you.",
