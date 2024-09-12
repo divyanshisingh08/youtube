@@ -33,15 +33,12 @@
         let complimentList = [
           "You look great today",
           "You’re a smart cookie.",
-          "You have impeccable manners",
           "I like your style",
           "You have the best laugh.",
           "I appreciate you",
           "You light up the room.",
-          "You deserve a hug right now",
           "That color is perfect on you.",
-          "You’re a candle in the darkness",
-          "You’re a great example to others",
+     
         ];
         
         export function generateRandomCompliment() {
