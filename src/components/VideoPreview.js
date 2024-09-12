@@ -30,9 +30,7 @@ const VideoPreview = ({ videoId }) => {
           allowFullScreen
         ></iframe>
       </div>
-      <div>
-        {/* <VideoInfoComponent info={video} /> */}
-      </div>
+  
       <CommentsContainer />
     </div>
   );
