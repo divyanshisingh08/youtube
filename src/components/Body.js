@@ -1,12 +1,12 @@
 import React from 'react'
-import MainContainer from './MainContainer'
-
 import Sidebar from './Sidebar';
-import WatchPage from './WatchPage';
+import Header from './Header';
 import { Outlet } from 'react-router-dom';
 
 const Body = () => {
   return (
+    <>
+    <Header />
     <div>
        <div className='flex'>
     <Sidebar/>
@@ -17,6 +17,8 @@ const Body = () => {
     </div>
 
     </div>
+
+    </>
   )
 }
 

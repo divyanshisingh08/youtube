@@ -17,7 +17,7 @@ const VideoPreview = ({ videoId }) => {
     const json = await data.json();
     setVideo(json.items[0]);
   };
-  if (video.length === 0) return <VideoPreviewShimmer />;
+  // if (video.length === 0) return <VideoPreviewShimmer />;
   return (
     <div className="flex flex-col md:w-3/5 md:mr-3 mb-4">
       <div>

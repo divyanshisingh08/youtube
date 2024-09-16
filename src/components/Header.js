@@ -1,19 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { MENU, USER_ICON, YOUTUBE_HAMBURGER_MENU, YOUTUBE_LOGO, YOUTUBE_SEARCH_API } from "../utils/constants";
+import { MENU, USER_ICON, YOUTUBE_HAMBURGER_MENU, YOUTUBE_LOGO, YOUTUBE_SEARCH_API, YOUTUBE_SEARCH_RESULTS_API } from "../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleMenu } from "../utils/menuSlice";
 import { cacheResults } from "../utils/searchSlice";
-import { Link } from "react-router-dom";
-
+import { API_KEY } from "../utils/constants";
+import SearchResultPage from "./SearchResultPage";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   const dispatch = useDispatch();
+  const navigate=useNavigate();
   const searchCache=useSelector(store=>store.search);
-
   const [searchQuery, setSearchQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [showSuggestions, setshowSuggestions] = useState(false);
-
+  const [searchResult,setSearchResult]=useState([])
+  
   /**
    * searchCache ={
    * "iphone"=["iphone","iphone 14"]
@@ -25,7 +27,7 @@ const Header = () => {
 
   useEffect(() => {
     //API CALL
-    console.log(searchQuery);
+    
     const timer = setTimeout(() => {
       if(searchCache[searchQuery]){
         setSuggestions(searchCache[searchQuery]);
@@ -33,11 +35,11 @@ const Header = () => {
       else{
       getSearchSuggestions()}
   }, 200);
-
+ 
     return () => {
       clearTimeout(timer);
     };
-
+    
     //DEBOUNCING- make an api call after every key press but if the difference between 2 keystrokes is <200ms -DECLINE the API call
   }, [searchQuery]);
 
@@ -59,10 +61,11 @@ const Header = () => {
    * 
    *
    */
+
   const getSearchSuggestions = async () => {
     const data = await fetch(YOUTUBE_SEARCH_API + searchQuery);
     const json = await data.json();
-    console.log(json[1]);
+    // console.log(json[1]);
 
     setSuggestions(json[1]);
 
@@ -73,6 +76,14 @@ const Header = () => {
 
   const toggleMenuHandler = () => {
     dispatch(toggleMenu());
+  };
+
+
+  const handleSearch = () => {
+    // Redirect to SearchResultPage with the search query as a URL parameter
+    if (searchQuery) {
+      navigate(`/search?query=${searchQuery}`);
+    }
   };
   return (
     <div className="grid grid-flow-col p-4 m-2 shadow-lg">
@@ -105,14 +116,14 @@ const Header = () => {
        
 
           />
-          <button className="border border-gray-400 p-2 rounded-r-full bg-gray-100">
+          <button className="border border-gray-400 p-2 rounded-r-full bg-gray-100" onClick={()=>handleSearch(searchQuery)}>
             Search
           </button>
         </div>
       { showSuggestions && (<div className=" absolute bg-white py-2 px-5 ml-1 w-[25rem] shadow-lg rounded-lg border border-gray-100">
           <ul>
             {suggestions.map((s) => (
-              <li key={s} className="shadow-sm py-2 hover:bg-gray-100 ">
+              <li key={s} className="shadow-sm py-2 hover:bg-gray-100 " >
                 {s}
               </li>
             ))}

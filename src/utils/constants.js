@@ -1,3 +1,4 @@
+
 export const API_KEY="AIzaSyA8_DssS7B2DF3hg-AVrDPST__5HBu9ePM";
 
 
@@ -18,8 +19,10 @@ export const live_Messages_Count=10;
 
 
 export const YOUTUBE_SEARCH_RESULTS_API =
-  "https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=50&";
+   "https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=50&";
+// `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=${searchQuery}&key=`+API_KEY;
 
+  
 
   export const YOUTUBE_GET_VIDEO_BY_ID = `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&id=`;
 
